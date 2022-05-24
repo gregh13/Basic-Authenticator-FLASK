@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+{{ super() }}
+<div class="box">
+    <h1>Login</h1>
+    {% if just_registered: %}
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div class=flashes>
+        {% for message in messages %}
+        <p style="color: #fff">{{ message }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+    {% else %}
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div class=flashes>
+        {% for message in messages %}
+        <br>
+        <p>{{ message }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+    {% endif %}
+    <form action="{{ url_for('login') }}" method="post">
+        <input type="text" name="email" placeholder="Email" required="required"/>
+        <input type="password" name="password" placeholder="Password" required="required"/>
+        <button type="submit" class="btn btn-primary btn-block btn-large">Let me in.</button>
+    </form>
+
+</div>
+
+{% endblock %}
